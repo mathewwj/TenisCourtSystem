@@ -1,10 +1,10 @@
-package com.jakuboc.TenisCourtSystem;
+package com.jakuboc.TennisCourtSystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TenisCourtSystemApplicationTests {
+class TennisCourtSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
