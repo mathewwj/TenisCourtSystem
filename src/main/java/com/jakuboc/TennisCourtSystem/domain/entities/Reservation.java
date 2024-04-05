@@ -19,7 +19,7 @@ public class Reservation {
     Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_phone", referencedColumnName = "phone_number")
+    @JoinColumn(name = "user_id", referencedColumnName = "phone_number")
     User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

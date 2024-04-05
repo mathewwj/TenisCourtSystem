@@ -52,7 +52,7 @@ public class CourtServiceImpl implements CourtService {
         if (!isValidSurfaceType(court)) {
             return Optional.empty();
         }
-        
+
         court.setId(id);
         return courtRepository.update(id, court);
     }
