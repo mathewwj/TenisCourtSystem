@@ -48,4 +48,10 @@ public class CourtController {
                             new ResponseEntity<>(courtMapper.mapTo(value), HttpStatus.CREATED))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
+
+    @DeleteMapping(path = "/api/courts/{id}")
+    public ResponseEntity deleteCourt(@PathVariable("id") Long id) {
+        courtService.deleteById(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }

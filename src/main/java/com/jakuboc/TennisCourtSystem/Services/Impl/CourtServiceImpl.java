@@ -32,4 +32,9 @@ public class CourtServiceImpl implements CourtService {
     public Optional<Court> findById(Long id) {
         return courtRepository.findById(id);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        courtRepository.deleteById(id);
+    }
 }
