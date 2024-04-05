@@ -43,15 +43,19 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public Optional<T> update(ID id, T entity) {
-        // TODO
-        return null;
+        Optional<T> inMemoryEntity = findById(id);
+        if (inMemoryEntity.isEmpty()) {
+            return Optional.empty();
+        }
+
+        getSession().merge(entity);
+        return findById(id);
     }
 
     @Override
     @Transactional
     public void deleteById(ID id) {
         findById(id).ifPresent(e -> getSession().remove(e));
-        // TODO flush or commit
     }
 
     private Session getSession() {

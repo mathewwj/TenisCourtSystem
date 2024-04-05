@@ -10,6 +10,7 @@ public interface CourtService {
      Optional<Court> save(Court court);
      List<Court> findAll();
      Optional<Court> findById(Long id);
-
      void deleteById(Long id);
+     Optional<Court> partialUpdate(Long id, Court court);
+     boolean isExists(Long id);
 }

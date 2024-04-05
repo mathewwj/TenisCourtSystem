@@ -54,4 +54,19 @@ public class CourtController {
         courtService.deleteById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @PatchMapping(path = "/api/courts/{id}")
+    public ResponseEntity<CourtDto> updateCourt(@PathVariable("id") Long id, @RequestBody CourtDto courtDto) {
+        if (!courtService.isExists(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Court court = courtMapper.mapFrom(courtDto);
+        Optional<Court> savedCourt = courtService.partialUpdate(id, court);
+
+        return savedCourt.map(value ->
+                        new ResponseEntity<>(courtMapper.mapTo(savedCourt.get()), HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
 }
