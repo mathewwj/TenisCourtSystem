@@ -16,11 +16,11 @@ public class ReservationMapperImpl  implements Mapper<Reservation, ReservationDt
 
     @Override
     public ReservationDto mapTo(Reservation reservation) {
-        return null;
+        return modelMapper.map(reservation, ReservationDto.class);
     }
 
     @Override
     public Reservation mapFrom(ReservationDto reservationDto) {
-        return null;
+        return modelMapper.map(reservationDto, Reservation.class);
     }
 }
