@@ -29,7 +29,7 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public List<T> findAll() {
-        return getSession().createQuery("FROM" + clazz.getName(), clazz).getResultList();
+        return getSession().createQuery("FROM " + clazz.getName(), clazz).getResultList();
     }
 
     @Override
@@ -44,13 +44,15 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public Optional<T> update(ID id, T entity) {
+        // TODO
         return null;
     }
 
     @Override
     @Transactional
     public void deleteById(ID id) {
-
+        findById(id).ifPresent(e -> getSession().remove(e));
+        // TODO flush or commit
     }
 
     private Session getSession() {
