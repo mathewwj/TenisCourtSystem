@@ -4,17 +4,17 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name="users")
+@Table(name="USERS")
 public class User {
     @Id
+    @Column(name = "phone_number")
     String phoneNumber;
-
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="user_id_seq")
     String name;
     String surname;
 }

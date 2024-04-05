@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @Table(name="reservations")
 public class Reservation {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="reservation_id_seq")
+//    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="reservation_id_seq")
     Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_phone", referencedColumnName = "phone_number")
     User user;
 
     @ManyToOne(cascade = CascadeType.ALL)

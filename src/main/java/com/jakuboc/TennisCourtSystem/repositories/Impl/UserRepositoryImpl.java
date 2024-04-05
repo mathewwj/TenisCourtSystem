@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepositoryImpl extends GenericCrudRepositoryImpl<User, String> implements UserRepository {
     @Autowired
-    protected UserRepositoryImpl(SessionFactory sessionFactory) {
+    public UserRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory, User.class);
     }
 }

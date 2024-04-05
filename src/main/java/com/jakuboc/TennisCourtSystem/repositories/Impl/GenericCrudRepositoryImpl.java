@@ -1,5 +1,6 @@
 package com.jakuboc.TennisCourtSystem.repositories.Impl;
 
+import com.jakuboc.TennisCourtSystem.domain.entities.User;
 import com.jakuboc.TennisCourtSystem.repositories.GenericCrudRepository;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
@@ -29,7 +30,8 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public List<T> findAll() {
-        return getSession().createQuery("FROM " + clazz.getName(), clazz).getResultList();
+        // TODO change later
+        return (List<T>) getSession().createQuery( "select e from User e", User.class).list();
     }
 
     @Override
