@@ -23,4 +23,6 @@ public class ReservationDto {
     LocalDateTime startTime;
 
     LocalDateTime endTime;
+
+    LocalDateTime createdTime;
 }

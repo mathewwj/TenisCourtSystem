@@ -26,7 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> findAllSorted() {
         return reservationRepository.findAll()
                 .stream()
-                .sorted(Comparator.comparing(r1 -> r1.getUser().getPhoneNumber()))
+                .sorted(Comparator.comparing(Reservation::getCreatedTime))
                 .collect(Collectors.toList());
     }
 }

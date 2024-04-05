@@ -34,4 +34,7 @@ public class Reservation {
 
     @Column(name = "end_time")
     LocalDateTime endTime;
+
+    @Column(name = "created_time")
+    LocalDateTime createdTime;
 }
