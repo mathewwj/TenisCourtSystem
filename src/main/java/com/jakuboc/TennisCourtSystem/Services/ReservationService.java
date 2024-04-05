@@ -13,4 +13,5 @@ public interface ReservationService {
     List<Reservation> findAllPhoneNumber(String phoneNumber);
     Optional<Reservation> create(Reservation reservation);
     void deleteById(Long id);
+    Optional<Reservation> partialUpdate(Long id, Reservation reservation);
 }

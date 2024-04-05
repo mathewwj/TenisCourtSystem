@@ -1,6 +1,7 @@
 package com.jakuboc.TennisCourtSystem.Services.Impl;
 
 import com.jakuboc.TennisCourtSystem.Services.ReservationService;
+import com.jakuboc.TennisCourtSystem.domain.entities.Court;
 import com.jakuboc.TennisCourtSystem.domain.entities.Reservation;
 import com.jakuboc.TennisCourtSystem.domain.entities.User;
 import com.jakuboc.TennisCourtSystem.repositories.CourtRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -55,17 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Optional<Reservation> create(Reservation reservation) {
-        var startTime = reservation.getStartTime();
-        var endTime = reservation.getEndTime();
-        if (!startTime.isBefore(endTime)) {
-            return Optional.empty();
-        }
-
-        boolean hasOverlaps = findAll()
-                .stream()
-                .anyMatch(r -> ServiceUtils.isOverlap(startTime, endTime, r.getStartTime(), r.getEndTime()));
-
-        if (hasOverlaps || !ServiceUtils.isValidCourt(reservation.getCourt(), courtRepository)) {
+        if (isValidReservation(reservation)) {
             return Optional.empty();
         }
 
@@ -82,4 +74,45 @@ public class ReservationServiceImpl implements ReservationService {
     public void deleteById(Long id) {
         reservationRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Reservation> partialUpdate(Long id, Reservation reservation) {
+        if (!isValidReservation(reservation)) {
+            return Optional.empty();
+        }
+
+        User user = reservation.getUser();
+        if (!userRepository.isExists(user.getPhoneNumber())
+                && reservationRepository.isExists(reservation.getId())) {
+            userRepository.save(user.getPhoneNumber(), user);
+        }
+
+        reservation.setId(id);
+        return reservationRepository.update(id, reservation);
+    }
+
+    private boolean isValidReservation(Reservation reservation) {
+        var startTime = reservation.getStartTime();
+        var endTime = reservation.getEndTime();
+        if (!startTime.isBefore(endTime)) {
+            return false;
+        }
+
+        boolean hasOverlaps = findAll()
+                .stream()
+                .anyMatch(r -> !Objects.equals(r.getId(), reservation.getId()) && isOverlap(startTime, endTime, r.getStartTime(), r.getEndTime()));
+
+        return !hasOverlaps && isValidCourt(reservation.getCourt());
+    }
+
+    public boolean isValidCourt(Court court) {
+        Optional<Court> inMemoryCourt = courtRepository.findById(court.getId());
+        return inMemoryCourt.isPresent() &&
+                Objects.equals(court, inMemoryCourt.get());
+    }
+
+    private static boolean isOverlap(LocalDateTime date1Start, LocalDateTime date1End, LocalDateTime date2Start, LocalDateTime date2End) {
+        return date1Start.isBefore(date2End) && date1End.isAfter(date2Start);
+    }
+
 }

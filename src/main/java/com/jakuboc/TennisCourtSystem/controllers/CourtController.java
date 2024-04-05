@@ -57,10 +57,6 @@ public class CourtController {
 
     @PatchMapping(path = "/api/courts/{id}")
     public ResponseEntity<CourtDto> updateCourt(@PathVariable("id") Long id, @RequestBody CourtDto courtDto) {
-        if (!courtService.isExists(id)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
         Court court = courtMapper.mapFrom(courtDto);
         Optional<Court> savedCourt = courtService.partialUpdate(id, court);
 

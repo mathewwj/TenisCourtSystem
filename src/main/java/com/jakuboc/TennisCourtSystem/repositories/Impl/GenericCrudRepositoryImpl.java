@@ -47,8 +47,7 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public Optional<T> update(ID id, T entity) {
-        Optional<T> inMemoryEntity = findById(id);
-        if (inMemoryEntity.isEmpty()) {
+        if (!isExists(id)) {
             return Optional.empty();
         }
 

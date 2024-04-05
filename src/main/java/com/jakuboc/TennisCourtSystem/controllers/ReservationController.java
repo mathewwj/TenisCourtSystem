@@ -63,6 +63,16 @@ public class ReservationController {
     }
 
 
+    @PatchMapping(path = "/api/reservations/{id}")
+    public ResponseEntity<ReservationDto> updateReservations(@PathVariable("id") Long id, @RequestBody ReservationDto reservationDto) {
+        Reservation reservation = reservationMapper.mapFrom(reservationDto);
+        Optional<Reservation> savedReservation = reservationService.partialUpdate(id, reservation);
+
+        return savedReservation.map(value ->
+                    new ResponseEntity<>(reservationMapper.mapTo(savedReservation.get()), HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
     @DeleteMapping(path = "/api/reservations/{id}")
     public ResponseEntity deleteReservation(@PathVariable("id") Long id) {
         reservationService.deleteById(id);
