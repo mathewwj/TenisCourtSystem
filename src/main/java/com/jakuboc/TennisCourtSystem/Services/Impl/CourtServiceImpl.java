@@ -27,4 +27,9 @@ public class CourtServiceImpl implements CourtService {
     public List<Court> findAll() {
         return courtRepository.findAll();
     }
+
+    @Override
+    public Optional<Court> findById(Long id) {
+        return courtRepository.findById(id);
+    }
 }

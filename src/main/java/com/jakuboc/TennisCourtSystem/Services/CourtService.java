@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface CourtService {
      Optional<Court> save(Court court);
      List<Court> findAll();
+     Optional<Court> findById(Long id);
 }
