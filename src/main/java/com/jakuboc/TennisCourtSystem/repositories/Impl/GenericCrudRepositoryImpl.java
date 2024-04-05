@@ -34,6 +34,10 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     @Override
     @Transactional
     public Optional<T> save(ID id, T entity) {
+        if (isExists(id)) {
+            return Optional.empty();
+        }
+
         getSession().persist(entity);
         getSession().flush();
 
@@ -58,6 +62,11 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
         findById(id).ifPresent(e -> getSession().remove(e));
     }
 
+    @Override
+    @Transactional
+    public boolean isExists(ID id) {
+        return findById(id).isPresent();
+    }
     private Session getSession() {
         return sessionFactory.getCurrentSession();
     }

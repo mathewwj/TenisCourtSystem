@@ -15,8 +15,7 @@ public class Court {
     @Id
     Long id;
 
-    // we do not want to save new
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne
     @JoinColumn(name = "surface_type_id", referencedColumnName = "id")
     SurfaceType surfaceType;
 

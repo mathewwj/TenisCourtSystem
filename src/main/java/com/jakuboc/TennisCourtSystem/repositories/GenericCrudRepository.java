@@ -9,6 +9,6 @@ public interface GenericCrudRepository<T, ID> {
     Optional<T> save(ID id, T entity);
     Optional<T> update(ID id, T entity);
     void deleteById(ID id);
-
+    boolean isExists(ID id);
 
 }

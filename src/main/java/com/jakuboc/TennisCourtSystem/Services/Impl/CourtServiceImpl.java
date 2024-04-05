@@ -25,7 +25,8 @@ public class CourtServiceImpl implements CourtService {
 
     @Override
     public Optional<Court> save(Court court) {
-        if (!isValidSurfaceType(court)) {
+        if (courtRepository.isExists(court.getId()) ||
+                !ServiceUtils.isValidSurfaceType(court.getSurfaceType(), surfaceTypeRepository)) {
             return Optional.empty();
         }
 
@@ -49,24 +50,11 @@ public class CourtServiceImpl implements CourtService {
 
     @Override
     public Optional<Court> partialUpdate(Long id, Court court) {
-        if (!isValidSurfaceType(court)) {
+        if (!ServiceUtils.isValidSurfaceType(court.getSurfaceType(), surfaceTypeRepository)) {
             return Optional.empty();
         }
 
         court.setId(id);
         return courtRepository.update(id, court);
-    }
-
-    @Override
-    public boolean isExists(Long id) {
-        return findById(id).isPresent();
-    }
-
-    private boolean isValidSurfaceType(Court court) {
-        SurfaceType courtSurfaceType = court.getSurfaceType();
-        Optional<SurfaceType> inMemorySurfaceType =
-                surfaceTypeRepository.findById(courtSurfaceType.getId());
-        return inMemorySurfaceType.isPresent() &&
-                Objects.equals(courtSurfaceType, inMemorySurfaceType.get());
     }
 }
