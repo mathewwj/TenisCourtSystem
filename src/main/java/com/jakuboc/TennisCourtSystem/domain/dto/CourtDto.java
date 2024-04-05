@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CourtDto {
     Long id;
 
-    Long surfaceId;
+    SurfaceTypeDto surfaceTypeDto;
 
     String name;
 }

@@ -6,9 +6,7 @@ import com.jakuboc.TennisCourtSystem.domain.entities.Court;
 import com.jakuboc.TennisCourtSystem.mappers.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +37,15 @@ public class CourtController {
         return court.map(value ->
                         new ResponseEntity<>(courtMapper.mapTo(value), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/api/courts")
+    public ResponseEntity<CourtDto> createCourt(@RequestBody CourtDto courtDto) {
+        Court court = courtMapper.mapFrom(courtDto);
+        var savedCourt = courtService.save(court);
+
+        return savedCourt.map(value ->
+                            new ResponseEntity<>(courtMapper.mapTo(value), HttpStatus.CREATED))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }

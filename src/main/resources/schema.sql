@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS courts;
 DROP TABLE IF EXISTS reservations;
 
 CREATE TABLE IF NOT EXISTS surface_types (
-     id BIGINT PRIMARY KEY,
+     id LONG PRIMARY KEY,
      name VARCHAR2 NOT NULL,
      payment_per_minute DOUBLE NOT NULL
 );
@@ -16,16 +16,16 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS courts (
-    id BIGINT PRIMARY KEY,
-    surface_type_id BIGINT,
+    id LONG PRIMARY KEY,
+    surface_type_id LONG,
     name VARCHAR2 NOT NULL,
     FOREIGN KEY (surface_type_id) REFERENCES surface_types(id)
 );
 
 CREATE TABLE IF NOT EXISTS reservations (
-    id BIGINT PRIMARY KEY,
+    id LONG PRIMARY KEY,
     user_id VARCHAR2,
-    court_id BIGINT,
+    court_id LONG,
     is_single BOOLEAN,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
