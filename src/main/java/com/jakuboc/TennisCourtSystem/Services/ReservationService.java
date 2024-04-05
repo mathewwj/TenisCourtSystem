@@ -7,4 +7,5 @@ import java.util.List;
 public interface ReservationService {
     List<Reservation> findAll();
     List<Reservation> findAllSorted();
+    List<Reservation> findAllPhoneNumber(String phoneNumber);
 }

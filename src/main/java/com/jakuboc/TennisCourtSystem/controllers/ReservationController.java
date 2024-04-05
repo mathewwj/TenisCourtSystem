@@ -6,6 +6,7 @@ import com.jakuboc.TennisCourtSystem.domain.entities.Reservation;
 import com.jakuboc.TennisCourtSystem.mappers.Mapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +27,15 @@ public class ReservationController {
     public List<ReservationDto> listSortedReservations() {
         List<Reservation> sortedReservations = reservationService.findAllSorted();
         return sortedReservations
+                .stream()
+                .map(reservationMapper::mapTo)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/api/reservations/{phone_number}")
+    public List<ReservationDto> listUserReservations(@PathVariable String phone_number) {
+        List<Reservation> filteredReservations = reservationService.findAllPhoneNumber(phone_number);
+        return filteredReservations
                 .stream()
                 .map(reservationMapper::mapTo)
                 .collect(Collectors.toList());
