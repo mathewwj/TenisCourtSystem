@@ -17,7 +17,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping(path = "/api/users")
     public List<UserDto> listUsers() {
         List<User> users = userService.findAll();

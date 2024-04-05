@@ -1,6 +1,6 @@
-package com.jakuboc.TennisCourtSystem.Mappers.Impl;
+package com.jakuboc.TennisCourtSystem.mappers.impl;
 
-import com.jakuboc.TennisCourtSystem.Mappers.Mapper;
+import com.jakuboc.TennisCourtSystem.mappers.Mapper;
 import com.jakuboc.TennisCourtSystem.domain.dto.ReservationDto;
 import com.jakuboc.TennisCourtSystem.domain.entities.Reservation;
 import org.modelmapper.ModelMapper;

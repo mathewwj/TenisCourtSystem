@@ -1,4 +1,4 @@
-package com.jakuboc.TennisCourtSystem.Mappers;
+package com.jakuboc.TennisCourtSystem.mappers;
 
 public interface Mapper<A,B> {
     B mapTo(A a);
