@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SoftDelete;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Table(name="courts")
+@SoftDelete
 public class Court {
-//    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="court_id_seq")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="court_id_seq")
     @Id
     Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "surface_type_id", referencedColumnName = "id")
     SurfaceType surfaceType;
 

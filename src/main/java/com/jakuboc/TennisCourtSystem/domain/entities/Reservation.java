@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SoftDelete;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -14,9 +15,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Table(name="reservations")
+@SoftDelete
 public class Reservation {
     @Id
-//    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="reservation_id_seq")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="reservation_id_seq")
     Long id;
 
     // PERSIST -> created only if does not exist
