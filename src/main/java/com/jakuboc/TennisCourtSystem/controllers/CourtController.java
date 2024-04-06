@@ -64,5 +64,4 @@ public class CourtController {
                         new ResponseEntity<>(courtMapper.mapTo(savedCourt.get()), HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
-
 }
