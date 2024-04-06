@@ -14,7 +14,6 @@ import org.hibernate.annotations.SoftDelete;
 @SoftDelete
 public class SurfaceType {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="surface_id_seq")
     Long id;
 
     String name;

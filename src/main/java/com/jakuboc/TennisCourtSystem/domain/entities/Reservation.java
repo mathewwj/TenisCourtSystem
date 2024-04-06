@@ -18,10 +18,8 @@ import java.time.LocalDateTime;
 @SoftDelete
 public class Reservation {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="reservation_id_seq")
     Long id;
 
-    // PERSIST -> created only if does not exist
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "phone_number")
     User user;

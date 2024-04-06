@@ -13,7 +13,6 @@ import org.hibernate.annotations.SoftDelete;
 @Table(name="courts")
 @SoftDelete
 public class Court {
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="court_id_seq")
     @Id
     Long id;
 
