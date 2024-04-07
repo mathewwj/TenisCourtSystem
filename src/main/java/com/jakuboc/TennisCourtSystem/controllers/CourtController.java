@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class CourtController {
     private final CourtService courtService;
     private final Mapper<Court, CourtDto> courtMapper;
@@ -22,7 +23,7 @@ public class CourtController {
         this.courtMapper = courtMapper;
     }
 
-    @GetMapping(path = "/api/courts")
+    @GetMapping(path = "/courts")
     public List<CourtDto> listCourts() {
         List<Court> courts = courtService.findAll();
 
@@ -30,7 +31,7 @@ public class CourtController {
                 .map(courtMapper::mapTo)
                 .collect(Collectors.toList());
     }
-    @GetMapping(path = "/api/courts/{id}")
+    @GetMapping(path = "/courts/{id}")
     public ResponseEntity<CourtDto> getCourt(@PathVariable("id") Long id) {
         Optional<Court> court = courtService.findById(id);
 
@@ -39,7 +40,7 @@ public class CourtController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/api/courts")
+    @PostMapping("/courts")
     public ResponseEntity<CourtDto> createCourt(@RequestBody CourtDto courtDto) {
         Court court = courtMapper.mapFrom(courtDto);
         var savedCourt = courtService.save(court);
@@ -49,13 +50,13 @@ public class CourtController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @DeleteMapping(path = "/api/courts/{id}")
+    @DeleteMapping(path = "/courts/{id}")
     public ResponseEntity deleteCourt(@PathVariable("id") Long id) {
         courtService.deleteById(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping(path = "/api/courts/{id}")
+    @PatchMapping(path = "/courts/{id}")
     public ResponseEntity<CourtDto> updateCourt(@PathVariable("id") Long id, @RequestBody CourtDto courtDto) {
         Court court = courtMapper.mapFrom(courtDto);
         Optional<Court> savedCourt = courtService.partialUpdate(id, court);

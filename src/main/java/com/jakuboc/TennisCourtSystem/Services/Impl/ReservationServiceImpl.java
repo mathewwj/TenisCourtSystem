@@ -57,7 +57,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Optional<Reservation> create(Reservation reservation) {
-        if (isValidReservation(reservation)) {
+        if (!isValidReservation(reservation)) {
             return Optional.empty();
         }
 
@@ -94,13 +94,14 @@ public class ReservationServiceImpl implements ReservationService {
     private boolean isValidReservation(Reservation reservation) {
         var startTime = reservation.getStartTime();
         var endTime = reservation.getEndTime();
-        if (!startTime.isBefore(endTime)) {
+        if (!startTime.isBefore(endTime) || startTime.isBefore(reservation.getCreatedTime())) {
             return false;
         }
 
         boolean hasOverlaps = findAll()
                 .stream()
-                .anyMatch(r -> !Objects.equals(r.getId(), reservation.getId()) && isOverlap(startTime, endTime, r.getStartTime(), r.getEndTime()));
+                .anyMatch(r -> !Objects.equals(r.getId(), reservation.getId()) &&
+                        isOverlap(startTime, endTime, r.getStartTime(), r.getEndTime()));
 
         return !hasOverlaps && isValidCourt(reservation.getCourt());
     }

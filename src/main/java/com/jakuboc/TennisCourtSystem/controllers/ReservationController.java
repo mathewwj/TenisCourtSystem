@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class ReservationController {
     private final ReservationService reservationService;
     private final Mapper<Reservation, ReservationDto> reservationMapper;
@@ -23,7 +24,7 @@ public class ReservationController {
         this.reservationMapper = reservationMapper;
     }
 
-    @GetMapping(path = "/api/reservations/{id}")
+    @GetMapping(path = "/reservations/{id}")
     public ResponseEntity<ReservationDto> getReservation(@PathVariable("id") Long id) {
         Optional<Reservation> reservation = reservationService.findById(id);
         return reservation.map(value ->
@@ -31,7 +32,7 @@ public class ReservationController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping(path = "/api/reservations")
+    @GetMapping(path = "/reservations")
     public List<ReservationDto> listSortedReservations() {
         List<Reservation> sortedReservations = reservationService.findAllSorted();
         return sortedReservations
@@ -40,7 +41,7 @@ public class ReservationController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(path = "/api/reservations/num/{phone_number}")
+    @GetMapping(path = "/reservations/num/{phone_number}")
     public List<ReservationDto> listUserReservations(@PathVariable("phone_number") String phoneNumber) {
         List<Reservation> filteredReservations = reservationService.findAllPhoneNumber(phoneNumber);
         return filteredReservations
@@ -49,7 +50,7 @@ public class ReservationController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping(path = "/api/reservations")
+    @PostMapping(path = "/reservations")
     public ResponseEntity<Double> createReservation(@RequestBody ReservationDto reservationDto) {
         Reservation reservation = reservationMapper.mapFrom(reservationDto);
         reservation.setCreatedTime(LocalDateTime.now());
@@ -63,7 +64,7 @@ public class ReservationController {
     }
 
 
-    @PatchMapping(path = "/api/reservations/{id}")
+    @PatchMapping(path = "/reservations/{id}")
     public ResponseEntity<ReservationDto> updateReservations(@PathVariable("id") Long id, @RequestBody ReservationDto reservationDto) {
         Reservation reservation = reservationMapper.mapFrom(reservationDto);
         Optional<Reservation> savedReservation = reservationService.partialUpdate(id, reservation);
@@ -73,7 +74,7 @@ public class ReservationController {
                 .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @DeleteMapping(path = "/api/reservations/{id}")
+    @DeleteMapping(path = "/reservations/{id}")
     public ResponseEntity deleteReservation(@PathVariable("id") Long id) {
         reservationService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
