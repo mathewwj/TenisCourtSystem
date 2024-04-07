@@ -1,9 +1,7 @@
 package com.jakuboc.TennisCourtSystem.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jakuboc.TennisCourtSystem.Services.CourtService;
 import com.jakuboc.TennisCourtSystem.domain.dto.ReservationDto;
-import com.jakuboc.TennisCourtSystem.domain.entities.Court;
 import com.jakuboc.TennisCourtSystem.domain.entities.GameType;
 import com.jakuboc.TennisCourtSystem.domain.entities.Reservation;
 import com.jakuboc.TennisCourtSystem.domain.entities.User;
@@ -13,7 +11,6 @@ import com.jakuboc.TennisCourtSystem.repositories.ReservationRepository;
 import com.jakuboc.TennisCourtSystem.repositories.SurfaceTypeRepository;
 import com.jakuboc.TennisCourtSystem.repositories.UserRepository;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.internal.Doubles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
