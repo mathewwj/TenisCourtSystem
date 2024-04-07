@@ -65,7 +65,7 @@ All entities are saved in H2 in-memory database.
 ### Reservation
 ```JSON
 {
-    "id": 5,
+    "id": 1,
     "user": {
         "phoneNumber": "987654321",
         "name": "Jane",
@@ -74,15 +74,15 @@ All entities are saved in H2 in-memory database.
     "court": {
         "id": 2,
         "surfaceTypeDto": {
-            "id": 2,
-            "name": "Hard",
-            "paymentPerMinute": 0.7
+              "id": 2,
+              "name": "Hard",
+              "paymentPerMinute": 0.7
         },
-        "name": "Hard court"
+        "name": "Hard court Brno-Bosonohy"
     },
     "gameType": "DOUBLES", // only allowed "SINGLES", "DOUBLES"
     "startTime": "2024-05-26T12:00:00",
     "endTime": "2024-05-26T14:00:00",
-    "createdTime": "2024-03-18T10:00:00"
+    "createdTime": "2024-04-07T21:33:52.128031"
 }
 ```
