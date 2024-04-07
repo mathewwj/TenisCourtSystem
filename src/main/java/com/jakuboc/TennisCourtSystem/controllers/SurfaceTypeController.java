@@ -1,11 +1,8 @@
 package com.jakuboc.TennisCourtSystem.controllers;
 
 import com.jakuboc.TennisCourtSystem.Services.SurfaceTypeService;
-import com.jakuboc.TennisCourtSystem.Services.UserService;
 import com.jakuboc.TennisCourtSystem.domain.dto.SurfaceTypeDto;
-import com.jakuboc.TennisCourtSystem.domain.dto.UserDto;
 import com.jakuboc.TennisCourtSystem.domain.entities.SurfaceType;
-import com.jakuboc.TennisCourtSystem.domain.entities.User;
 import com.jakuboc.TennisCourtSystem.mappers.Mapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
