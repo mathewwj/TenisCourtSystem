@@ -53,7 +53,7 @@ All entities are saved in H2 in-memory database.
 ### Court
 ```JSON
 {
-    "id": 1,
+    "id": 5,
     "surfaceTypeDto": {
         "id": 1,
         "name": "Clay",
