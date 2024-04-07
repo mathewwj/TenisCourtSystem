@@ -1,5 +1,8 @@
 # Tennis Court System
 
+**Author**: Matúš Jakuboc <br>
+**Email**: matus.jaku@gmail.com <br>
+
 Information system for persisting information about reservations, users, and courts. <br>
 Spring Java Boot application with REST endpoints located at `/api/*`. <br>
 The persistence layer is handled by hibernate. <br>
@@ -10,7 +13,7 @@ All entities are saved in H2 in-memory database.
  - Get all `GET /api/courts`
  - Get one `GET /api/courts/{id}`
  - Create `POST /api/courts`
- - Partial update `GET /api/courts/{post}`
+ - Partial update `PATCH /api/courts/{id}`
  - Delete `DELETE /api/courts/{id}`
 
 ### Reservation management
@@ -18,7 +21,7 @@ All entities are saved in H2 in-memory database.
  - Get one `GET /api/reservations/{id}`
  - Create `POST /api/reservations`
  - Get only reserved by specific user in future `GET /reservations/num/{phone_number}`
- - Partial update `GET /api/reservations/{id}`
+ - Partial update `PATCH /api/reservations/{id}`
  - Delete `DELETE /reservations/{id}`
 
 ### User management
