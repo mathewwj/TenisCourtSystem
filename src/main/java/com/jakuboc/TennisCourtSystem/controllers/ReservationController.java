@@ -68,7 +68,7 @@ public class ReservationController {
 
 
     @PatchMapping(path = "/reservations/{id}")
-    public ResponseEntity<ReservationDto> updateReservations(@PathVariable("id") Long id, @RequestBody ReservationDto reservationDto) {
+    public ResponseEntity<ReservationDto> updateReservation(@PathVariable("id") Long id, @RequestBody ReservationDto reservationDto) {
         Reservation reservation = reservationMapper.mapFrom(reservationDto);
         Optional<Reservation> savedReservation = reservationService.partialUpdate(id, reservation);
 

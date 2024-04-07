@@ -28,8 +28,9 @@ public class Reservation {
     @JoinColumn(name = "court_id", referencedColumnName = "id")
     Court court;
 
-    @Column(name = "is_single")
-    boolean isSingle;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "game_type")
+    GameType gameType;
 
     @Column(name = "start_time")
     LocalDateTime startTime;
@@ -46,8 +47,7 @@ public class Reservation {
     public Double getPrice() {
         long minutes = Duration.between(startTime, endTime).toMinutes();
         double paymentPerMinute = court.getSurfaceType().paymentPerMinute;
-        double multiplier = isSingle? 1 : 1.5;
+        double multiplier = gameType.equals(GameType.SINGLES)? 1 : 1.5;
         return minutes * paymentPerMinute * multiplier;
     }
-
 }

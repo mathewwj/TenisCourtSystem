@@ -1,5 +1,6 @@
 package com.jakuboc.TennisCourtSystem.domain.dto;
 
+import com.jakuboc.TennisCourtSystem.domain.entities.GameType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class ReservationDto {
 
     CourtDto court;
 
-    boolean isSingle;
+    GameType gameType;
 
     LocalDateTime startTime;
 

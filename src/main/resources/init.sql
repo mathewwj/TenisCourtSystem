@@ -8,10 +8,10 @@ INSERT INTO users (phone_number, name, surname) VALUES ('987654321', 'Jane', 'Sm
 INSERT INTO courts (id, name, surface_type_id) VALUES (1, 'Clay court', 1);
 INSERT INTO courts (id, name, surface_type_id) VALUES (2, 'Hard court', 2);
 
-INSERT INTO reservations (id, user_id, court_id, is_single, start_time, end_time, created_time)
-    VALUES (1, '123456789', 1, true, '2024-03-25 10:00:00', '2024-03-25 11:00:00', '2024-03-21 10:00:00');
-INSERT INTO reservations (id, user_id, court_id, is_single, start_time, end_time, created_time)
-    VALUES (2, '987654321', 2, false, '2024-03-26 12:00:00', '2024-03-26 14:00:00', '2024-03-18 10:00:00');
-INSERT INTO reservations (id, user_id, court_id, is_single, start_time, end_time, created_time)
-    VALUES (3, '987654321', 2, false, '2024-04-26 12:00:00', '2024-04-26 14:00:00', '2024-03-18 10:00:00');
+INSERT INTO reservations (id, user_id, court_id, game_type, start_time, end_time, created_time)
+    VALUES (1, '123456789', 1, 'SINGLES', '2024-03-25 10:00:00', '2024-03-25 11:00:00', '2024-03-21 10:00:00');
+INSERT INTO reservations (id, user_id, court_id, game_type, start_time, end_time, created_time)
+    VALUES (2, '987654321', 2, 'SINGLES', '2024-03-26 12:00:00', '2024-03-26 14:00:00', '2024-03-18 10:00:00');
+INSERT INTO reservations (id, user_id, court_id, game_type, start_time, end_time, created_time)
+    VALUES (3, '987654321', 2, 'DOUBLES', '2024-04-26 12:00:00', '2024-04-26 14:00:00', '2024-03-18 10:00:00');
 

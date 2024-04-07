@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS reservations (
     id LONG PRIMARY KEY,
     user_id VARCHAR2 NOT NULL,
     court_id LONG NOT NULL,
-    is_single BOOLEAN NOT NULL,
+    game_type ENUM('SINGLES', 'DOUBLES') NOT NULL,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     created_time TIMESTAMP NOT NULL,
