@@ -48,11 +48,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findAllPhoneNumber(String phoneNumber) {
-        LocalDateTime now = LocalDateTime.now();
-        return findAllSorted().stream()
-                .filter(r -> r.getUser().getPhoneNumber().equals(phoneNumber)
-                        && now.isBefore(r.getStartTime()))
-                .collect(Collectors.toList());
+        return reservationRepository.findAllPhoneNumber(phoneNumber);
     }
 
     @Override

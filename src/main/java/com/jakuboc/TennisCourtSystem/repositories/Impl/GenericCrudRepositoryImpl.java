@@ -66,7 +66,7 @@ public abstract class GenericCrudRepositoryImpl<T, ID> implements GenericCrudRep
     public boolean isExists(ID id) {
         return findById(id).isPresent();
     }
-    private Session getSession() {
+    protected Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 }
