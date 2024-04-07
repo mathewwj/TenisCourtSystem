@@ -12,6 +12,10 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * class for initializing data into database,
+ * runs only if {@code data.init.enabled=true} config is set
+ */
 @Configuration
 public class DataInitializer implements ApplicationRunner {
 

@@ -5,6 +5,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * config class of beans for modelMapper injections
+ */
 @Configuration
 public class MapperConfig {
     @Bean

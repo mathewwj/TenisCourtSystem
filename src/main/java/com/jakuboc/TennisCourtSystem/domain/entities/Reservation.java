@@ -40,6 +40,9 @@ public class Reservation {
     @Column(name = "created_time")
     LocalDateTime createdTime;
 
+    /**
+     * calculates a price for given reservation
+     */
     public Double getPrice() {
         long minutes = Duration.between(startTime, endTime).toMinutes();
         double paymentPerMinute = court.getSurfaceType().paymentPerMinute;

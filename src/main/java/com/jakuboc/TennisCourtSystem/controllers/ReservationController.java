@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * api controller for {@link Reservation}
+ */
 @RestController
 @RequestMapping("/api")
 public class ReservationController {

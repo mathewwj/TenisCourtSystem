@@ -12,11 +12,6 @@ public class CourtMapperImpl implements Mapper<Court, CourtDto> {
 
     public CourtMapperImpl(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-        //
-//        this.modelMapper
-//                .createTypeMap(Court.class, CourtDto.class)
-//                .addMapping(src -> src.getSurfaceType().getId(),
-//                                CourtDto::setSurfaceId);
     }
 
     @Override
