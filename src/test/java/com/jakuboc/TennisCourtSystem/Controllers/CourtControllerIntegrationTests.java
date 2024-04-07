@@ -34,7 +34,6 @@ import java.util.Optional;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 public class CourtControllerIntegrationTests {
-    private final CourtService courtService;
     private final MockMvc mockMvc;
     private final ObjectMapper objectMapper;
     private final SurfaceTypeRepository surfaceTypeRepository;
@@ -42,8 +41,7 @@ public class CourtControllerIntegrationTests {
     private final Mapper<Court, CourtDto> courtMapper;
 
     @Autowired
-    public CourtControllerIntegrationTests(CourtService courtService, MockMvc mockMvc, SurfaceTypeRepository surfaceTypeRepository, CourtRepository courtRepository, Mapper<Court, CourtDto> courtMapper) {
-        this.courtService = courtService;
+    public CourtControllerIntegrationTests(MockMvc mockMvc, SurfaceTypeRepository surfaceTypeRepository, CourtRepository courtRepository, Mapper<Court, CourtDto> courtMapper) {
         this.mockMvc = mockMvc;
         this.surfaceTypeRepository = surfaceTypeRepository;
         this.courtRepository = courtRepository;
@@ -53,9 +51,7 @@ public class CourtControllerIntegrationTests {
 
     @BeforeEach
     public void addSurfaces() {
-        for (var s : TestUtils.surfaceTypes) {
-            surfaceTypeRepository.save(s.getId(), s);
-        }
+        TestUtils.surfaceTypes.forEach(s -> surfaceTypeRepository.save(s.getId(), s));
     }
 
     @Test
@@ -81,7 +77,7 @@ public class CourtControllerIntegrationTests {
     @Test
     public void testThatCreatedDuplicateCourtFails() throws Exception {
         Court court = TestUtils.courts.get(0);
-        courtRepository.save(1L, TestUtils.courts.get(0));
+        courtRepository.save(court.getId(), TestUtils.courts.get(0));
         String courtJson = objectMapper.writeValueAsString(courtMapper.mapTo(court));
 
         mockMvc.perform(
@@ -98,7 +94,7 @@ public class CourtControllerIntegrationTests {
     @Test
     public void testThatGetOneCourtWorks() throws Exception {
         Court court = TestUtils.courts.get(0);
-        courtRepository.save(1L, court);
+        courtRepository.save(court.getId(), court);
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/courts/" + court.getId())
         ).andExpect(
@@ -114,8 +110,10 @@ public class CourtControllerIntegrationTests {
 
     @Test
     public void testThatReturnAllCourtWorks() throws Exception {
-        courtRepository.save(1L, TestUtils.courts.get(0));
-        courtRepository.save(2L, TestUtils.courts.get(1));
+        Court court = TestUtils.courts.get(0);
+        Court court1 = TestUtils.courts.get(1);
+        courtRepository.save(court.getId(), court);
+        courtRepository.save(court1.getId(), court1);
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/courts")
         ).andExpect(
@@ -129,7 +127,7 @@ public class CourtControllerIntegrationTests {
     @Test
     public void testThatDeleteCourtWorks() throws Exception {
         Court court = TestUtils.courts.get(0);
-        courtRepository.save(1L, court);
+        courtRepository.save(court.getId(), court);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.delete("/api/courts/" + court.getId())
@@ -151,7 +149,7 @@ public class CourtControllerIntegrationTests {
     @Test
     public void testThatUpdateCourtWorks() throws Exception {
         Court court = TestUtils.courts.get(0);
-        courtRepository.save(1L, court);
+        courtRepository.save(court.getId(), court);
         court.setName("updated name");
         String courtJson = objectMapper.writeValueAsString(courtMapper.mapTo(court));
 
@@ -173,7 +171,7 @@ public class CourtControllerIntegrationTests {
     @Test
     public void testThatUpdateInvalidCourtFails() throws Exception {
         Court court = TestUtils.courts.get(0);
-        courtRepository.save(1L, court);
+        courtRepository.save(court.getId(), court);
         court.getSurfaceType().setId(69L);
         String courtJson = objectMapper.writeValueAsString(courtMapper.mapTo(court));
 

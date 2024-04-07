@@ -30,8 +30,9 @@ public class TestUtils {
     );
 
     public static final List<Reservation> reservations = Arrays.asList(
-            new Reservation(1L, users.get(0), courts.get(0), GameType.SINGLES, LocalDateTime.of(2024, 4, 4, 16, 0), LocalDateTime.of(2024, 4, 4, 17, 0), LocalDateTime.of(2024, 4, 4, 10, 0)),
+            new Reservation(1L, users.get(0), courts.get(0), GameType.SINGLES, LocalDateTime.of(2024, 5, 4, 16, 0), LocalDateTime.of(2024, 5, 4, 17, 0), LocalDateTime.of(2024, 4, 4, 10, 0)),
+            new Reservation(2L, users.get(1), courts.get(1), GameType.SINGLES, LocalDateTime.of(2024, 5, 4, 16, 0), LocalDateTime.of(2024, 5, 4, 17, 0), LocalDateTime.of(2024, 4, 4, 10, 0)),
             // overlapping
-            new Reservation(2L, users.get(1), courts.get(1), GameType.DOUBLES, LocalDateTime.of(2024, 4, 4, 15, 30), LocalDateTime.of(2024, 4, 4, 16, 30), LocalDateTime.of(2024, 4, 4, 1, 0))
+            new Reservation(3L, users.get(0), courts.get(0), GameType.DOUBLES, LocalDateTime.of(2024, 5, 4, 16, 0), LocalDateTime.of(2024, 5, 4, 17, 0), LocalDateTime.of(2024, 4, 4, 10, 0))
     );
 }

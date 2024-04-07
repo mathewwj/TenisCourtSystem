@@ -97,6 +97,7 @@ public class ReservationServiceImpl implements ReservationService {
         boolean hasOverlaps = findAll()
                 .stream()
                 .anyMatch(r -> !Objects.equals(r.getId(), reservation.getId()) &&
+                        Objects.equals(r.getCourt().getId(), reservation.getCourt().getId()) &&
                         isOverlap(startTime, endTime, r.getStartTime(), r.getEndTime()));
 
         return !hasOverlaps && isValidCourt(reservation.getCourt());
@@ -111,5 +112,4 @@ public class ReservationServiceImpl implements ReservationService {
     private static boolean isOverlap(LocalDateTime date1Start, LocalDateTime date1End, LocalDateTime date2Start, LocalDateTime date2End) {
         return date1Start.isBefore(date2End) && date1End.isAfter(date2Start);
     }
-
 }
