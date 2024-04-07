@@ -1,7 +1,6 @@
 package com.jakuboc.TennisCourtSystem.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jakuboc.TennisCourtSystem.Services.CourtService;
 import com.jakuboc.TennisCourtSystem.domain.dto.CourtDto;
 import com.jakuboc.TennisCourtSystem.domain.entities.Court;
 import com.jakuboc.TennisCourtSystem.mappers.Mapper;
@@ -25,7 +24,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import java.util.List;
 import java.util.Optional;
 
 
