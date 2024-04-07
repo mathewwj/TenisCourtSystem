@@ -53,6 +53,10 @@ public class ReservationController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * creates reservation
+     * @return price of reservation
+     */
     @PostMapping(path = "/reservations")
     public ResponseEntity<Double> createReservation(@RequestBody ReservationDto reservationDto) {
         Reservation reservation = reservationMapper.mapFrom(reservationDto);
