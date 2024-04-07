@@ -30,6 +30,9 @@ All entities are saved in H2 in-memory database.
 ### Surface type management
  - Get all `GET /api/surface-types`
 
+## Class diagram
+![Tennis Court System Diagram](diagrams/TennisCourtSystem.svg)
+
 ## Examples of entities sent by API (DTOs)
 ### User
 ```JSON
@@ -62,7 +65,7 @@ All entities are saved in H2 in-memory database.
 ### Reservation
 ```JSON
 {
-    "id": 2,
+    "id": 5,
     "user": {
         "phoneNumber": "987654321",
         "name": "Jane",
@@ -78,8 +81,8 @@ All entities are saved in H2 in-memory database.
         "name": "Hard court"
     },
     "gameType": "DOUBLES", // only allowed "SINGLES", "DOUBLES"
-    "startTime": "2024-03-26T12:00:00",
-    "endTime": "2024-03-26T14:00:00",
+    "startTime": "2024-05-26T12:00:00",
+    "endTime": "2024-05-26T14:00:00",
     "createdTime": "2024-03-18T10:00:00"
 }
 ```
