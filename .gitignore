@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Diagrams ###
+diagrams/*
+!diagrams/*.vpp
+!diagrams/*.svg
